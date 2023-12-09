@@ -29,6 +29,7 @@ contract Stacker is ERC721URIStorage{
         event Withdraw(address indexed account, uint amount);
         event Completed(uint totalBalance);
         event NotCompleted(uint totalBalance);
+        event NFTClaimed(address indexed account);
 
         modifier notCompleted() {
             require(completment_status == 0);
@@ -104,6 +105,7 @@ contract Stacker is ERC721URIStorage{
                 _safeMint(msg.sender, nft_id);
                 _setTokenURI(nft_id, BRONZE_NFT_URI);
             }
+            emit NFTClaimed(msg.sender);
         }
 
         function complete() external notCompleted gatheringFinished{
