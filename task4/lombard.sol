@@ -65,14 +65,16 @@ contract lombard is Ownable {
         collateral_percentage = _collateral_percentage;
     }
 
-    function add_token_for_loans(address token) external onlyOwner() {
+    function addTokenForLoans(address token, address _token_price_addr) external onlyOwner() {
         require(!tokenUsedForLoan(token), "Token already used for loans");
         tokens_for_loan.push(token);
+        token_price_addr[token] = _token_price_addr;
     }
 
-    function add_token_for_stake(address token) external onlyOwner() {
+    function addTokenForStakes(address token, address _token_price_addr) external onlyOwner() {
         require(!tokenUsedForStake(token), "Token already used for loans");
         tokens_for_stake.push(token);
+        token_price_addr[token] = _token_price_addr;
     }
 
 
